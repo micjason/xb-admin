@@ -1,15 +1,5 @@
-# mall-admin
+# Vue 3 + TypeScript + Vite
 
-本项目为 mall 系统的后台管理系统前端，基于 Vue3 + Element Plus + Pinia + Vite 等技术栈开发，实现商城后台的各类管理功能。
+This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-## 技术栈
-- Vue 3
-- Element Plus
-- Pinia
-- Vue Router
-- Axios
-- Echarts
-- TypeScript
-
-## 主要功能
-详见《开发计划.md》 
+Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
