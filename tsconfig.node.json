@@ -1,25 +1,41 @@
 {
+  // 继承主 tsconfig.json 配置，保证全局编译选项一致
+  "extends": "./tsconfig.json",
+  // 针对 Node.js 环境的编译选项
   "compilerOptions": {
+    // 存储 TypeScript 增量编译信息的文件路径
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    // 指定 ECMAScript 目标版本
     "target": "ES2022",
+    // 指定可用的库文件
     "lib": ["ES2023"],
+    // 指定模块系统
     "module": "ESNext",
+    // 跳过库文件类型检查，加快编译速度
     "skipLibCheck": true,
-
-    /* Bundler mode */
+    // 使用 bundler 方式解析模块
     "moduleResolution": "bundler",
+    // 允许导入 .ts 扩展名的模块
     "allowImportingTsExtensions": true,
+    // 保留原始的模块语法
     "verbatimModuleSyntax": true,
+    // 强制所有文件都被视为模块
     "moduleDetection": "force",
+    // 不生成输出文件
     "noEmit": true,
-
-    /* Linting */
+    // 启用严格类型检查
     "strict": true,
+    // 检查未使用的局部变量
     "noUnusedLocals": true,
+    // 检查未使用的参数
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
+    // 检查 switch 语句中是否有遗漏的 case
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    // 检查导入的副作用
+    "noUncheckedSideEffectImports": true,
+    // 指定 Node.js 的类型声明
+    "types": ["node"]
   },
+  // 仅包含 Node.js 相关的配置文件
   "include": ["vite.config.ts"]
 }

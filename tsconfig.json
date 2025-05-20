@@ -1,7 +1,29 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  // TypeScript 主配置文件，定义全局编译选项和包含/排除文件
+  "compilerOptions": {
+    // 允许 JavaScript 文件被编译
+    "allowJs": true,
+    // 允许 ES 模块语法
+    "module": "ESNext",
+    // 允许使用最新的 ECMAScript 特性
+    "target": "ESNext",
+    // 生成 sourceMap 便于调试
+    "sourceMap": true,
+    // 允许解析 JSON 模块
+    "resolveJsonModule": true,
+    // 使用 node 方式解析模块，解决 resolveJsonModule 报错
+    "moduleResolution": "node",
+    // 启用严格类型检查
+    "strict": true,
+    // 允许默认导入非ES模块
+    "esModuleInterop": true,
+    // 允许 synthetic default imports
+    "allowSyntheticDefaultImports": true,
+    // 允许导入 .vue 文件
+    "types": ["vite/client"]
+  },
+  // 包含的文件
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  // 排除的文件
+  "exclude": ["node_modules", "dist"]
 }

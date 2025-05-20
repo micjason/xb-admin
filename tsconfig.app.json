@@ -1,15 +1,21 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  // 继承主 tsconfig.json 配置，保证全局编译选项一致
+  "extends": "./tsconfig.json",
   "compilerOptions": {
+    // 存储 TypeScript 增量编译信息的文件路径
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 
-    /* Linting */
+    // 启用严格类型检查
     "strict": true,
+    // 检查未使用的局部变量
     "noUnusedLocals": true,
+    // 检查未使用的参数
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
+    // 检查 switch 语句中是否有遗漏的 case
     "noFallthroughCasesInSwitch": true,
+    // 检查导入的副作用
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
+  // 仅包含 src 目录下的业务代码
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
