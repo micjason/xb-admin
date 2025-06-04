@@ -2,6 +2,8 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
 import { constantRoutes, asyncRoutes } from '@/router';
+import { getUserMenuRoutes } from '@/api/permission';
+import type { MenuRoute } from '@/types/permission';
 
 // 菜单项类型定义
 export interface MenuItem {
@@ -68,13 +70,13 @@ export const usePermissionStore = defineStore('permission', () => {
     const filterRoutes = (routeList: RouteRecordRaw[]): RouteRecordRaw[] => {
       return routeList.filter(route => {
         // 检查路由权限
-        if (route.meta?.roles && route.meta.roles.length > 0) {
-          if (!route.meta.roles.some(role => roles.value.includes(role))) {
+        if (route.meta?.roles && Array.isArray(route.meta.roles) && route.meta.roles.length > 0) {
+          if (!route.meta.roles.some((role: string) => roles.value.includes(role))) {
             return false;
           }
         }
-        if (route.meta?.permissions && route.meta.permissions.length > 0) {
-          if (!route.meta.permissions.some(permission => permissions.value.includes(permission))) {
+        if (route.meta?.permissions && Array.isArray(route.meta.permissions) && route.meta.permissions.length > 0) {
+          if (!route.meta.permissions.some((permission: string) => permissions.value.includes(permission))) {
             return false;
           }
         }
@@ -157,29 +159,109 @@ export const usePermissionStore = defineStore('permission', () => {
     isPermissionLoaded.value = loaded;
   };
 
-  return {
-    // 状态
-    routes,
-    menus,
-    permissions,
-    roles,
-    buttons,
-    isPermissionLoaded,
-    
-    // 计算属性
-    hasPermission,
-    hasRole,
-    hasAnyPermission,
-    hasButtonPermission,
-    getAccessibleRoutes,
-    
-    // Actions
-    setPermissions,
-    setMenus,
-    setRoutes,
-    setButtons,
-    generateRoutes,
-    resetPermission,
-    setPermissionLoaded
+  /**
+   * 获取用户动态菜单路由
+   */
+  const generateDynamicRoutes = async (): Promise<RouteRecordRaw[]> => {
+    try {
+      const { data } = await getUserMenuRoutes();
+      const dynamicRoutes = convertMenuRoutesToRoutes(data);
+      setRoutes([...constantRoutes, ...dynamicRoutes]);
+      return dynamicRoutes;
+    } catch (error) {
+      console.error('获取动态路由失败:', error);
+      return [];
+    }
   };
+
+  /**
+   * 将菜单路由数据转换为Vue Router路由配置
+   */
+  const convertMenuRoutesToRoutes = (menuRoutes: MenuRoute[]): RouteRecordRaw[] => {
+    const routes: RouteRecordRaw[] = [];
+    
+    menuRoutes.forEach(menuRoute => {
+      const route: RouteRecordRaw = {
+        path: menuRoute.path,
+        name: menuRoute.name || menuRoute.path.replace(/\//g, '_'),
+        component: getComponent(menuRoute.component),
+        meta: {
+          title: menuRoute.meta?.title || '未命名',
+          icon: menuRoute.meta?.icon,
+          hidden: menuRoute.meta?.hidden || false,
+          roles: menuRoute.meta?.roles || [],
+          permissions: []
+        }
+      };
+      
+      // 设置重定向
+      if (menuRoute.redirect) {
+        route.redirect = menuRoute.redirect;
+      }
+      
+      // 处理子路由
+      if (menuRoute.children && menuRoute.children.length > 0) {
+        route.children = convertMenuRoutesToRoutes(menuRoute.children);
+      }
+      
+      routes.push(route);
+    });
+    
+    return routes;
+  };
+
+  /**
+   * 根据组件路径获取组件
+   */
+  const getComponent = (componentPath?: string) => {
+    if (!componentPath) {
+      return () => import('@/layouts/Layout.vue');
+    }
+    
+    // 组件映射
+    const componentMap: Record<string, any> = {
+      'Layout': () => import('@/layouts/Layout.vue'),
+      'system/admin/index': () => import('@/views/system/admin/index.vue'),
+      'system/role/index': () => import('@/views/system/role/index.vue'),
+      'system/permission/index': () => import('@/views/system/permission/index.vue')
+    };
+    
+    if (componentMap[componentPath]) {
+      return componentMap[componentPath];
+    }
+    
+    // 动态导入
+    if (componentPath.startsWith('@/')) {
+      return () => import(/* @vite-ignore */ componentPath);
+    }
+    
+    return () => import(/* @vite-ignore */ `@/views/${componentPath}.vue`);
+  };
+
+      return {
+      // 状态
+      routes,
+      menus,
+      permissions,
+      roles,
+      buttons,
+      isPermissionLoaded,
+      
+      // 计算属性
+      hasPermission,
+      hasRole,
+      hasAnyPermission,
+      hasButtonPermission,
+      getAccessibleRoutes,
+      
+      // Actions
+      setPermissions,
+      setMenus,
+      setRoutes,
+      setButtons,
+      generateRoutes,
+      resetPermission,
+      setPermissionLoaded,
+      generateDynamicRoutes
+    };
 }); 

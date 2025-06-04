@@ -13,22 +13,7 @@
         </div>
         
         <!-- 菜单 -->
-        <el-menu
-          :default-active="activeMenu"
-          :collapse="collapse"
-          :unique-opened="true"
-          router
-          background-color="#304156"
-          text-color="#bfcbd9"
-          active-text-color="#409eff"
-        >
-          <sidebar-item
-            v-for="route in menuRoutes"
-            :key="route.path"
-            :item="route"
-            :base-path="route.path"
-          />
-        </el-menu>
+        <sidebar-menu :is-collapse="collapse" />
       </el-aside>
 
       <!-- 主体容器 -->
@@ -92,7 +77,7 @@ import { ElMessage, ElMessageBox } from 'element-plus';
 import { Menu, ArrowDown } from '@element-plus/icons-vue';
 import { useAuthStore } from '@/store/modules/auth';
 import { usePermissionStore } from '@/store/modules/permission';
-import SidebarItem from './components/SidebarItem.vue';
+import SidebarMenu from '@/components/SidebarMenu.vue';
 
 const route = useRoute();
 const router = useRouter();
