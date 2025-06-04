@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { getToken, removeToken } from '@/utils/token';
 import type { ApiResponse } from '@/types/api';
@@ -12,7 +12,7 @@ const service: AxiosInstance = axios.create({
 
 // 请求拦截器
 service.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
+  (config: InternalAxiosRequestConfig) => {
     // 添加token到请求头
     const token = getToken();
     if (token && config.headers) {

@@ -21,6 +21,8 @@
     "resolveJsonModule": true,
     // 使用 node 方式解析模块，解决 resolveJsonModule 报错
     "moduleResolution": "node",
+    // 跳过库文件类型检查，加快编译速度
+    "skipLibCheck": true,
     // 启用严格类型检查
     "strict": true,
     // 允许默认导入非ES模块
