@@ -1,6 +1,12 @@
 {
   // TypeScript 主配置文件，定义全局编译选项和包含/排除文件
   "compilerOptions": {
+    // 基础路径
+    "baseUrl": ".",
+    // 路径映射
+    "paths": {
+      "@/*": ["src/*"]
+    },
     // 允许 JavaScript 文件被编译
     "allowJs": true,
     // 允许 ES 模块语法

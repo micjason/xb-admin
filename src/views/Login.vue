@@ -6,12 +6,24 @@
           <div class="login-logo-placeholder"></div>
           <div class="login-title">商城后台管理系统</div>
         </div>
-        <el-form :model="form" :rules="rules" ref="formRef" label-width="80px" size="large">
+        <el-form :model="form" :rules="rules" ref="formRef" label-width="80px" size="large" @keyup.enter="onLogin">
           <el-form-item label="用户名" prop="username">
-            <el-input v-model="form.username" placeholder="请输入用户名" clearable />
+            <el-input 
+              v-model="form.username" 
+              placeholder="请输入用户名" 
+              clearable 
+              @keyup.enter="onLogin"
+            />
           </el-form-item>
           <el-form-item label="密码" prop="password">
-            <el-input v-model="form.password" type="password" placeholder="请输入密码" show-password clearable />
+            <el-input 
+              v-model="form.password" 
+              type="password" 
+              placeholder="请输入密码" 
+              show-password 
+              clearable 
+              @keyup.enter="onLogin"
+            />
           </el-form-item>
           <el-form-item>
             <el-checkbox v-model="form.remember">记住我</el-checkbox>
@@ -28,31 +40,65 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
+import { useAuthStore } from '@/store/modules/auth';
+import type { LoginRequest } from '@/types/auth';
+
+const router = useRouter();
+const authStore = useAuthStore();
 
 const formRef = ref();
 const loading = ref(false);
-const form = ref({
+const form = ref<LoginRequest>({
   username: '',
   password: '',
   remember: false
 });
+
 const rules = {
-  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+  username: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 3, max: 20, message: '用户名长度为3-20位', trigger: 'blur' }
+  ],
+  password: [
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 6, max: 20, message: '密码长度为6-20位', trigger: 'blur' }
+  ]
 };
 
-const onLogin = () => {
-  formRef.value.validate((valid: boolean) => {
+const onLogin = async () => {
+  try {
+    // 表单验证
+    const valid = await formRef.value.validate();
     if (!valid) return;
+
     loading.value = true;
-    // TODO: 调用后端登录接口
-    setTimeout(() => {
-      loading.value = false;
-      ElMessage.success('登录成功（请对接后端接口）');
-      // 登录成功后跳转主页面
-    }, 1000);
-  });
+    
+    // 调用登录API
+    const success = await authStore.loginAction(form.value);
+    
+    if (success) {
+      ElMessage.success('登录成功');
+      
+      // 登录成功后跳转到仪表盘
+      await router.push('/dashboard');
+    } else {
+      // 错误信息已在store中处理，这里不需要额外处理
+    }
+  } catch (error) {
+    console.error('登录错误:', error);
+    ElMessage.error('登录失败，请检查网络连接');
+  } finally {
+    loading.value = false;
+  }
+};
+
+// 支持回车键登录
+const handleKeyup = (event: KeyboardEvent) => {
+  if (event.key === 'Enter') {
+    onLogin();
+  }
 };
 </script>
 
