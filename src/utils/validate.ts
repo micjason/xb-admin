@@ -88,4 +88,34 @@ export function isIP(ip: string): boolean {
 export function isIdCard(idCard: string): boolean {
   const idCardRegex = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
   return idCardRegex.test(idCard);
+}
+
+/**
+ * Element Plus 表单验证 - 邮箱
+ */
+export function validateEmail(rule: any, value: string, callback: any) {
+  if (!value) {
+    callback();
+    return;
+  }
+  if (!isEmail(value)) {
+    callback(new Error('请输入正确的邮箱地址'));
+  } else {
+    callback();
+  }
+}
+
+/**
+ * Element Plus 表单验证 - 手机号
+ */
+export function validatePhone(rule: any, value: string, callback: any) {
+  if (!value) {
+    callback();
+    return;
+  }
+  if (!isPhone(value)) {
+    callback(new Error('请输入正确的手机号'));
+  } else {
+    callback();
+  }
 } 
