@@ -243,6 +243,23 @@
         />
       </div>
     </el-card>
+
+    <!-- 文件上传对话框 -->
+    <el-dialog
+      v-model="uploadDialogVisible"
+      title="上传文件"
+      width="600px"
+    >
+      <div class="upload-placeholder">
+        <el-icon size="48" color="#c0c4cc">
+          <Upload />
+        </el-icon>
+        <p style="margin-top: 16px; color: #909399;">文件上传功能开发中...</p>
+      </div>
+      <template #footer>
+        <el-button @click="uploadDialogVisible = false">关闭</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -315,6 +332,7 @@ const storageTypeOptions = ref<Array<{ label: string; value: StorageType }>>([])
 
 // 对话框状态
 const editDialogVisible = ref(false)
+const uploadDialogVisible = ref(false)
 const currentResource = ref<Resource | null>(null)
 const dialogMode = ref<'add' | 'edit' | 'view'>('view')
 
@@ -415,7 +433,7 @@ const handleSelectionChange = (selection: Resource[]) => {
  * 上传文件
  */
 const handleUpload = () => {
-  ElMessage.info('文件上传功能开发中...')
+  uploadDialogVisible.value = true
 }
 
 /**
@@ -600,6 +618,14 @@ const handleEditSuccess = () => {
   fetchResourceStats()
 }
 
+/**
+ * 上传成功处理
+ */
+const handleUploadSuccess = () => {
+  fetchResourceList()
+  fetchResourceStats()
+}
+
 // 组件挂载时初始化数据
 onMounted(() => {
   fetchResourceList()
@@ -707,5 +733,10 @@ onMounted(() => {
     display: flex;
     justify-content: center;
   }
+}
+
+.upload-placeholder {
+  text-align: center;
+  padding: 40px 0;
 }
 </style> 

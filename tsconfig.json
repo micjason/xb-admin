@@ -13,8 +13,10 @@
     "module": "ESNext",
     // 允许使用最新的 ECMAScript 特性
     "target": "ESNext",
-    // 生成 sourceMap 便于调试
-    "sourceMap": true,
+    // 禁用 sourceMap 生成（避免污染源码目录）
+    "sourceMap": false,
+    // 不生成编译输出文件（仅用于类型检查）
+    "noEmit": true,
     // 允许解析 JSON 模块
     "resolveJsonModule": true,
     // 使用 node 方式解析模块，解决 resolveJsonModule 报错
