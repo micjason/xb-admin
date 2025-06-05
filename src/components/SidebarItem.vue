@@ -108,7 +108,7 @@ const path = {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .el-menu-item {
   &.is-active {
     background-color: #263445 !important;

@@ -533,56 +533,56 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .admin-management {
   padding: 20px;
-}
 
-.page-header {
-  margin-bottom: 20px;
-}
+  .page-header {
+    margin-bottom: 20px;
 
-.page-header h2 {
-  color: #303133;
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0 0 8px 0;
-}
+    h2 {
+      color: #303133;
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
 
-.page-header p {
-  color: #909399;
-  font-size: 14px;
-  margin: 0;
-}
+    p {
+      color: #909399;
+      font-size: 14px;
+      margin: 0;
+    }
+  }
 
-.search-card {
-  margin-bottom: 20px;
-}
+  .search-card {
+    margin-bottom: 20px;
+  }
 
-.table-card {
-  margin-bottom: 20px;
-}
+  .table-card {
+    margin-bottom: 20px;
 
-.table-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
 
-.table-actions {
-  display: flex;
-  gap: 8px;
-}
+      .table-actions {
+        display: flex;
+        gap: 8px;
+      }
 
-.table-info {
-  color: #909399;
-  font-size: 14px;
-}
+      .table-info {
+        color: #909399;
+        font-size: 14px;
+      }
+    }
+  }
 
-.pagination-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  .pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
 }
 </style> 

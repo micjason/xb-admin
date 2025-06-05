@@ -577,7 +577,7 @@ watch(() => formData.type, () => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .form-tip {
   font-size: 12px;
   color: var(--el-color-info);

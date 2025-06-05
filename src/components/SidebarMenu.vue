@@ -49,7 +49,7 @@ const permissionRoutes = computed(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .el-menu {
   border-right: none;
 }

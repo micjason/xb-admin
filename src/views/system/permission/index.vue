@@ -520,7 +520,7 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .permission-container {
   padding: 20px;
 }

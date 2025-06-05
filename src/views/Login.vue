@@ -102,52 +102,58 @@ const handleKeyup = (event: KeyboardEvent) => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .login-bg {
   min-height: 100vh;
   background: linear-gradient(135deg, #e0e7ef 0%, #f5f7fa 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.login-wrapper {
-  width: 420px;
-  margin: 0 auto;
-}
-.login-card {
-  border-radius: 12px;
-  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
-  padding: 36px 32px 24px 32px;
-}
-.login-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 32px;
-}
-.login-logo-placeholder {
-  width: 56px;
-  height: 56px;
-  margin-bottom: 12px;
-  border-radius: 16px;
-  background: #e5e6eb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: #bbb;
-  border: 1.5px dashed #d3d3d3;
-}
-.login-title {
-  font-size: 22px;
-  font-weight: bold;
-  color: #409eff;
-  letter-spacing: 2px;
-}
-.login-footer {
-  text-align: center;
-  color: #aaa;
-  font-size: 13px;
-  margin-top: 18px;
+
+  .login-wrapper {
+    width: 420px;
+    margin: 0 auto;
+
+    .login-card {
+      border-radius: 12px;
+      box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
+      padding: 36px 32px 24px 32px;
+
+      .login-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 32px;
+
+        .login-logo-placeholder {
+          width: 56px;
+          height: 56px;
+          margin-bottom: 12px;
+          border-radius: 16px;
+          background: #e5e6eb;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          color: #bbb;
+          border: 1.5px dashed #d3d3d3;
+        }
+
+        .login-title {
+          font-size: 22px;
+          font-weight: bold;
+          color: #409eff;
+          letter-spacing: 2px;
+        }
+      }
+    }
+
+    .login-footer {
+      text-align: center;
+      color: #aaa;
+      font-size: 13px;
+      margin-top: 18px;
+    }
+  }
 }
 </style> 

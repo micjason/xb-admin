@@ -197,23 +197,23 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .category-management {
   padding: 20px;
-}
 
-.search-card {
-  margin-bottom: 20px;
-}
+  .search-card {
+    margin-bottom: 20px;
+  }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.pagination-container {
-  margin-top: 20px;
-  text-align: right;
+  .pagination-container {
+    margin-top: 20px;
+    text-align: right;
+  }
 }
 </style> 

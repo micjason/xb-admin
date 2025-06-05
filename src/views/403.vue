@@ -27,7 +27,7 @@ const goHome = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .error-page {
   height: 100vh;
   display: flex;

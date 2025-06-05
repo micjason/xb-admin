@@ -164,27 +164,27 @@ watch(
 );
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .admin-info {
   margin-bottom: 20px;
-}
 
-.info-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-}
+  .info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
 
-.info-item .label {
-  color: #606266;
-  font-weight: 500;
-  width: 80px;
-  flex-shrink: 0;
-}
+    .label {
+      color: #606266;
+      font-weight: 500;
+      width: 80px;
+      flex-shrink: 0;
+    }
 
-.info-item .value {
-  color: #303133;
-  flex: 1;
+    .value {
+      color: #303133;
+      flex: 1;
+    }
+  }
 }
 
 .password-tips {
@@ -193,25 +193,25 @@ watch(
   border-radius: 4px;
   padding: 16px;
   margin-top: 20px;
-}
 
-.password-tips h4 {
-  color: #303133;
-  font-size: 14px;
-  font-weight: 600;
-  margin: 0 0 12px 0;
-}
+  h4 {
+    color: #303133;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+  }
 
-.password-tips ul {
-  margin: 0;
-  padding-left: 16px;
-}
+  ul {
+    margin: 0;
+    padding-left: 16px;
 
-.password-tips li {
-  color: #606266;
-  font-size: 13px;
-  line-height: 1.6;
-  margin-bottom: 4px;
+    li {
+      color: #606266;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 4px;
+    }
+  }
 }
 
 .dialog-footer {

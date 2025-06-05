@@ -361,27 +361,27 @@ watch(
 );
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .avatar-uploader {
   text-align: center;
-}
 
-.avatar-uploader .el-upload {
-  border: 1px dashed var(--el-border-color);
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: var(--el-transition-duration-fast);
-  width: 100px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .el-upload {
+    border: 1px dashed var(--el-border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: var(--el-transition-duration-fast);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.avatar-uploader .el-upload:hover {
-  border-color: var(--el-color-primary);
+    &:hover {
+      border-color: var(--el-color-primary);
+    }
+  }
 }
 
 .avatar-uploader-icon {
@@ -398,12 +398,12 @@ watch(
 
 .avatar-tips {
   margin-top: 8px;
-}
 
-.avatar-tips p {
-  margin: 0;
-  font-size: 12px;
-  color: #909399;
+  p {
+    margin: 0;
+    font-size: 12px;
+    color: #909399;
+  }
 }
 
 .dialog-footer {

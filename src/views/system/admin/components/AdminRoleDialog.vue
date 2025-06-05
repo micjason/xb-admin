@@ -169,7 +169,7 @@ watch(
 );
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .role-dialog-content {
   max-height: 60vh;
   overflow-y: auto;

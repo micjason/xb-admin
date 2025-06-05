@@ -269,7 +269,7 @@ watch(
 )
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .dialog-footer {
   text-align: right;
 }

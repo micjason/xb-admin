@@ -532,39 +532,39 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .role-container {
   padding: 20px;
-}
 
-.search-card {
-  margin-bottom: 20px;
-}
+  .search-card {
+    margin-bottom: 20px;
+  }
 
-.table-card {
-  min-height: 600px;
-}
+  .table-card {
+    min-height: 600px;
 
-.table-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-.table-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #303133;
-}
+      .table-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #303133;
+      }
 
-.table-actions {
-  display: flex;
-  gap: 10px;
-}
+      .table-actions {
+        display: flex;
+        gap: 10px;
+      }
+    }
+  }
 
-.pagination-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
 }
 </style> 

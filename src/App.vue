@@ -14,6 +14,6 @@ onMounted(async () => {
   <router-view />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 /* 全局样式可以在这里添加 */
 </style>

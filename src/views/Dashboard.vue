@@ -19,7 +19,7 @@ import { useAuthStore } from '@/store/modules/auth';
 
 const authStore = useAuthStore();
 const currentTime = ref(new Date().toLocaleString());
-let timer: NodeJS.Timeout;
+let timer: number;
 
 const userInfo = authStore.userInfo;
 
@@ -36,7 +36,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .dashboard {
   padding: 20px;
 }

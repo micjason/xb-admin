@@ -87,9 +87,11 @@ const resolvePath = (routePath: string): string => {
 };
 </script>
 
-<style scoped>
-.el-sub-menu .el-menu-item {
-  min-width: 0;
+<style scoped lang="scss">
+.el-sub-menu {
+  .el-menu-item {
+    min-width: 0;
+  }
 }
 
 .el-menu-item {

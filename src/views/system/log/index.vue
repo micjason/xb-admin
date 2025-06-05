@@ -299,7 +299,7 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .log-management {
   padding: 20px;
 }

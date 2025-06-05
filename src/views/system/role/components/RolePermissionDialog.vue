@@ -277,67 +277,67 @@ watch(
 )
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .permission-dialog-content {
   max-height: 600px;
   overflow-y: auto;
-}
 
-.role-info {
-  margin-bottom: 20px;
-}
+  .role-info {
+    margin-bottom: 20px;
+  }
 
-.permission-tree-container {
-  border: 1px solid #e4e7ed;
-  border-radius: 4px;
-}
+  .permission-tree-container {
+    border: 1px solid #e4e7ed;
+    border-radius: 4px;
 
-.tree-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  border-bottom: 1px solid #e4e7ed;
-  background-color: #f5f7fa;
-}
+    .tree-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid #e4e7ed;
+      background-color: #f5f7fa;
 
-.tree-header h4 {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: #303133;
-}
+      h4 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: #303133;
+      }
 
-.tree-actions {
-  display: flex;
-  gap: 8px;
-}
+      .tree-actions {
+        display: flex;
+        gap: 8px;
+      }
+    }
 
-.tree-content {
-  padding: 16px;
-  max-height: 400px;
-  overflow-y: auto;
-}
+    .tree-content {
+      padding: 16px;
+      max-height: 400px;
+      overflow-y: auto;
 
-.tree-node-content {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-}
+      .tree-node-content {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
 
-.tree-node-icon {
-  font-size: 16px;
-  color: #606266;
-}
+        .tree-node-icon {
+          font-size: 16px;
+          color: #606266;
+        }
 
-.tree-node-label {
-  flex: 1;
-}
+        .tree-node-label {
+          flex: 1;
+        }
 
-.tree-node-type {
-  font-size: 12px;
-  margin-left: auto;
+        .tree-node-type {
+          font-size: 12px;
+          margin-left: auto;
+        }
+      }
+    }
+  }
 }
 
 .dialog-footer {
