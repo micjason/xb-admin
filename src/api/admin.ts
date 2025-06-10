@@ -15,7 +15,7 @@ import type { ApiResponse } from '@/types/api';
  * @returns 管理员列表响应
  */
 export function getAdminList(params: AdminListQuery): Promise<ApiResponse<AdminListResponse>> {
-  return get('/api/admins', params);
+  return get('/users/list', params);
 }
 
 /**
@@ -24,7 +24,7 @@ export function getAdminList(params: AdminListQuery): Promise<ApiResponse<AdminL
  * @returns 管理员详情
  */
 export function getAdminDetail(id: number): Promise<ApiResponse<Admin>> {
-  return get(`/api/admins/${id}`);
+  return get('/users/findOne', { id });
 }
 
 /**
@@ -33,7 +33,7 @@ export function getAdminDetail(id: number): Promise<ApiResponse<Admin>> {
  * @returns 创建结果
  */
 export function createAdmin(data: CreateAdminRequest): Promise<ApiResponse<Admin>> {
-  return post('/api/admins', data);
+  return post('/users/create', data);
 }
 
 /**
@@ -43,7 +43,7 @@ export function createAdmin(data: CreateAdminRequest): Promise<ApiResponse<Admin
  * @returns 更新结果
  */
 export function updateAdmin(id: number, data: UpdateAdminRequest): Promise<ApiResponse<Admin>> {
-  return put(`/api/admins/${id}`, data);
+  return post('/users/update', { id, ...data });
 }
 
 /**
@@ -52,7 +52,7 @@ export function updateAdmin(id: number, data: UpdateAdminRequest): Promise<ApiRe
  * @returns 删除结果
  */
 export function deleteAdmin(id: number): Promise<ApiResponse<void>> {
-  return deleteRequest(`/api/admins/${id}`);
+  return post('/users/delete', { id });
 }
 
 /**
@@ -62,7 +62,7 @@ export function deleteAdmin(id: number): Promise<ApiResponse<void>> {
  * @returns 修改结果
  */
 export function updateAdminStatus(id: number, status: number): Promise<ApiResponse<void>> {
-  return put(`/api/admins/${id}/status`, { status });
+  return post('/users/update', { id, status });
 }
 
 /**
@@ -72,7 +72,7 @@ export function updateAdminStatus(id: number, status: number): Promise<ApiRespon
  * @returns 分配结果
  */
 export function assignAdminRoles(id: number, data: AssignRolesRequest): Promise<ApiResponse<void>> {
-  return put(`/api/admins/${id}/roles`, data);
+  return post('/users/update', { id, roleIds: data.roleIds });
 }
 
 /**
@@ -82,7 +82,7 @@ export function assignAdminRoles(id: number, data: AssignRolesRequest): Promise<
  * @returns 重置结果
  */
 export function resetAdminPassword(id: number, newPassword: string): Promise<ApiResponse<void>> {
-  return put(`/api/admins/${id}/reset-password`, { password: newPassword });
+  return post('/users/update', { id, password: newPassword });
 }
 
 /**
@@ -90,7 +90,7 @@ export function resetAdminPassword(id: number, newPassword: string): Promise<Api
  * @returns 角色列表
  */
 export function getAllRoles(): Promise<ApiResponse<Array<{ id: number; name: string; description?: string }>>> {
-  return get('/api/roles/all');
+  return get('/roles');
 }
 
 /**
@@ -99,7 +99,7 @@ export function getAllRoles(): Promise<ApiResponse<Array<{ id: number; name: str
  * @returns 删除结果
  */
 export function batchDeleteAdmins(ids: number[]): Promise<ApiResponse<void>> {
-  return deleteRequest('/api/admins/batch', { ids });
+  return post('/users/delete', { ids });
 }
 
 /**
@@ -108,5 +108,5 @@ export function batchDeleteAdmins(ids: number[]): Promise<ApiResponse<void>> {
  * @returns 导出文件
  */
 export function exportAdmins(params: AdminListQuery): Promise<Blob> {
-  return download('/api/admins/export', params);
+  return download('/users/export', params);
 } 

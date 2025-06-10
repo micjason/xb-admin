@@ -48,7 +48,6 @@ export const useAuthStore = defineStore('auth', () => {
         roles.value = userRoles || [];
         isLoggedIn.value = true;
         
-        ElMessage.success('登录成功');
         return true;
       } else {
         ElMessage.error(response.message || '登录失败');

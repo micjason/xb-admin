@@ -165,7 +165,7 @@
             >
               编辑
             </el-button>
-            <el-dropdown @command="(command) => handleDropdownCommand(command, row)">
+            <el-dropdown @command="(command: string) => handleDropdownCommand(command, row)">
               <el-button size="small">
                 更多<el-icon><ArrowDown /></el-icon>
               </el-button>
@@ -260,14 +260,14 @@ import {
   exportAdmins,
   getAllRoles
 } from '@/api/admin';
-import { usePermissionStore } from '@/store/modules/permission';
+import { hasPermission } from '@/utils/permission';
 import { AdminStatus, type Admin, type AdminSearchForm, type AdminListQuery } from '@/types/admin';
 import { formatTime } from '@/utils/format';
 import AdminEditDialog from './components/AdminEditDialog.vue';
 import AdminRoleDialog from './components/AdminRoleDialog.vue';
 import AdminPasswordDialog from './components/AdminPasswordDialog.vue';
 
-const permissionStore = usePermissionStore();
+
 
 // 响应式数据
 const loading = ref(false);
@@ -305,9 +305,6 @@ const currentAdmin = ref<Admin | null>(null);
 const isEdit = ref(false);
 
 // 计算属性
-const hasPermission = computed(() => (permission: string) => {
-  return permissionStore.hasPermission.value(permission);
-});
 
 // 方法
 const fetchData = async () => {

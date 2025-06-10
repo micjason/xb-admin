@@ -11,8 +11,7 @@
             <el-input 
               v-model="form.username" 
               placeholder="请输入用户名" 
-              clearable 
-              @keyup.enter="onLogin"
+              clearable
             />
           </el-form-item>
           <el-form-item label="密码" prop="password">
@@ -21,8 +20,7 @@
               type="password" 
               placeholder="请输入密码" 
               show-password 
-              clearable 
-              @keyup.enter="onLogin"
+              clearable
             />
           </el-form-item>
           <el-form-item>
@@ -68,6 +66,11 @@ const rules = {
 };
 
 const onLogin = async () => {
+  // 防止重复提交
+  if (loading.value) {
+    return;
+  }
+
   try {
     // 表单验证
     const valid = await formRef.value.validate();
@@ -91,13 +94,6 @@ const onLogin = async () => {
     ElMessage.error('登录失败，请检查网络连接');
   } finally {
     loading.value = false;
-  }
-};
-
-// 支持回车键登录
-const handleKeyup = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') {
-    onLogin();
   }
 };
 </script>
