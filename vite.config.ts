@@ -19,7 +19,7 @@ export default defineConfig(({ command, mode }) => {
     
     // 开发服务器配置
     server: {
-      port: 8080,
+      port: 8888,
       host: true,
       open: true,
       // API代理配置

@@ -44,8 +44,10 @@ const activeMenu = computed(() => {
 // 有权限的路由
 const permissionRoutes = computed(() => {
   return permissionStore.routes.filter(route => {
-    return !route.meta?.hidden && route.children && route.children.length > 0
-  })
+    const hasChildren = route.children && route.children.length > 0;
+    const isNotHidden = !route.meta?.hidden;
+    return isNotHidden && hasChildren;
+  });
 })
 </script>
 

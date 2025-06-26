@@ -1,3 +1,7 @@
+<template>
+  <router-view />
+</template>
+
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { useAuthStore } from '@/store/modules/auth';
@@ -9,10 +13,6 @@ onMounted(async () => {
   await authStore.initAuth();
 });
 </script>
-
-<template>
-  <router-view />
-</template>
 
 <style scoped lang="scss">
 /* 全局样式可以在这里添加 */

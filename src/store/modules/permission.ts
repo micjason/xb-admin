@@ -56,7 +56,7 @@ export const usePermissionStore = defineStore('permission', () => {
     return roles.value.includes(role);
   });
 
-  const hasAnyPermission = computed(() => (permissionList: string[]) => {
+  const hasAnyPermission = computed(() => (permissionList: readonly string[]) => {
     if (roles.value.includes('admin')) return true;
     return permissionList.some(permission => permissions.value.includes(permission));
   });
@@ -69,14 +69,27 @@ export const usePermissionStore = defineStore('permission', () => {
   const getAccessibleRoutes = computed(() => {
     const filterRoutes = (routeList: RouteRecordRaw[]): RouteRecordRaw[] => {
       return routeList.filter(route => {
-        // 检查路由权限
+        // 如果是admin角色，直接通过
+        if (roles.value.includes('admin')) {
+          // 如果有子路由，递归过滤子路由
+          if (route.children && route.children.length > 0) {
+            route.children = filterRoutes(route.children);
+          }
+          return true;
+        }
+        
+        // 检查角色权限
         if (route.meta?.roles && Array.isArray(route.meta.roles) && route.meta.roles.length > 0) {
-          if (!route.meta.roles.some((role: string) => roles.value.includes(role))) {
+          const hasRolePermission = route.meta.roles.some((role: string) => hasRole.value(role));
+          if (!hasRolePermission) {
             return false;
           }
         }
+        
+        // 检查具体权限
         if (route.meta?.permissions && Array.isArray(route.meta.permissions) && route.meta.permissions.length > 0) {
-          if (!route.meta.permissions.some((permission: string) => permissions.value.includes(permission))) {
+          const hasRoutePermission = hasAnyPermission.value(route.meta.permissions);
+          if (!hasRoutePermission) {
             return false;
           }
         }
@@ -97,9 +110,9 @@ export const usePermissionStore = defineStore('permission', () => {
   /**
    * 设置权限数据
    */
-  const setPermissions = (userPermissions: string[], userRoles: string[]): void => {
-    permissions.value = userPermissions;
-    roles.value = userRoles;
+  const setPermissions = (userPermissions: readonly string[], userRoles: readonly string[]): void => {
+    permissions.value = [...userPermissions];
+    roles.value = [...userRoles];
   };
 
   /**
@@ -127,17 +140,18 @@ export const usePermissionStore = defineStore('permission', () => {
    * 生成动态路由（基于用户权限过滤）
    */
   const generateRoutes = (): RouteRecordRaw[] => {
-    // 如果是管理员，返回所有路由
-    if (roles.value.includes('admin')) {
-      const allRoutes = [...constantRoutes, ...asyncRoutes];
-      setRoutes(allRoutes);
-      return allRoutes;
-    }
-    
-    // 否则根据权限过滤路由
+    // 获取可访问的路由
     const accessibleRoutes = getAccessibleRoutes.value;
+    
+    // 设置路由
     setRoutes(accessibleRoutes);
-    return accessibleRoutes;
+    
+    // 只返回异步路由部分，因为常量路由已经在router中注册了
+    const asyncAccessibleRoutes = accessibleRoutes.filter(route => 
+      !constantRoutes.some(constantRoute => constantRoute.path === route.path)
+    );
+    
+    return asyncAccessibleRoutes;
   };
 
   /**
