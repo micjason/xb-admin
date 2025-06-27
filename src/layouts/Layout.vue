@@ -77,7 +77,7 @@ import { ElMessage, ElMessageBox } from 'element-plus';
 import { Menu, ArrowDown } from '@element-plus/icons-vue';
 import { useAuthStore } from '@/store/modules/auth';
 import { usePermissionStore } from '@/store/modules/permission';
-import SidebarMenu from '@/components/SidebarMenu.vue';
+import SidebarMenu from './components/SidebarMenu.vue';
 
 const route = useRoute();
 const router = useRouter();

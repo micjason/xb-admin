@@ -15,16 +15,54 @@ export const useAuthStore = defineStore('auth', () => {
 
   // 计算属性
   const isAuthenticated = computed(() => !!token.value && isLoggedIn.value);
+  
+  // 优化权限检查逻辑，支持通配符和admin角色
   const hasPermission = computed(() => (permission: string) => {
+    // admin角色拥有所有权限
+    if (roles.value.includes('admin')) {
+      return true;
+    }
+    
+    // 检查是否有通配符权限
+    if (permissions.value.includes('*')) {
+      return true;
+    }
+    
+    // 检查具体权限
     return permissions.value.includes(permission);
   });
+  
   const hasRole = computed(() => (role: string) => {
     return roles.value.includes(role);
   });
+  
   const hasAnyPermission = computed(() => (permissionList: string[]) => {
+    // admin角色拥有所有权限
+    if (roles.value.includes('admin')) {
+      return true;
+    }
+    
+    // 检查是否有通配符权限
+    if (permissions.value.includes('*')) {
+      return true;
+    }
+    
+    // 检查是否有任一权限
     return permissionList.some(permission => permissions.value.includes(permission));
   });
+  
   const hasAllPermissions = computed(() => (permissionList: string[]) => {
+    // admin角色拥有所有权限
+    if (roles.value.includes('admin')) {
+      return true;
+    }
+    
+    // 检查是否有通配符权限
+    if (permissions.value.includes('*')) {
+      return true;
+    }
+    
+    // 检查是否有所有权限
     return permissionList.every(permission => permissions.value.includes(permission));
   });
 
