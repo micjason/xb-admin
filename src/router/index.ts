@@ -105,6 +105,16 @@ export const asyncRoutes: RouteRecordRaw[] = [
         }
       },
       {
+        path: 'media',
+        name: 'MediaManagement',
+        component: () => import('@/views/system/media/index.vue'),
+        meta: {
+          title: '图片管理',
+          icon: 'Picture',
+          permissions: ['media:view']
+        }
+      },
+      {
         path: 'log',
         name: 'LogManagement',
         component: () => import('@/views/system/log/index.vue'),
@@ -144,6 +154,17 @@ export const asyncRoutes: RouteRecordRaw[] = [
         meta: {
           title: '商品管理',
           icon: 'Goods',
+          permissions: ['goods:view']
+        }
+      },
+      {
+        path: 'goods/:id',
+        name: 'GoodsDetail',
+        component: () => import('@/views/product/goods/detail.vue'),
+        meta: {
+          title: '商品详情',
+          hidden: true,
+          activeMenu: '/product/goods',
           permissions: ['goods:view']
         }
       }
